@@ -1,0 +1,120 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
+| Date         : Wed Dec 17 10:46:31 2025
+| Host         : DESKTOP-CRGUU9O running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file AHBLITE_SYS_control_sets_placed.rpt
+| Design       : AHBLITE_SYS
+| Device       : xc7a200t
+----------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Number of unique control sets                            |    51 |
+| Unused register locations in slices containing registers |   173 |
++----------------------------------------------------------+-------+
+
+
+2. Histogram
+------------
+
++--------+--------------+
+| Fanout | Control Sets |
++--------+--------------+
+|      1 |            1 |
+|      4 |            5 |
+|      5 |           16 |
+|      8 |            8 |
+|     15 |            1 |
+|    16+ |           20 |
++--------+--------------+
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             100 |           59 |
+| No           | No                    | Yes                    |             177 |          121 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |             464 |          217 |
+| Yes          | No                    | Yes                    |             110 |           40 |
+| Yes          | Yes                   | No                     |              80 |           33 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++----------------+----------------------------------------------+----------------------------------------------+------------------+----------------+
+|  Clock Signal  |                 Enable Signal                |               Set/Reset Signal               | Slice Load Count | Bel Load Count |
++----------------+----------------------------------------------+----------------------------------------------+------------------+----------------+
+|  CLK_IBUF_BUFG |                                              |                                              |                1 |              1 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Rskax6_i_1_n_0 |                                              |                3 |              4 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Iixpw6_i_1_n_0 |                                              |                1 |              4 |
+|  fclk          |                                              | RESET_IBUF                                   |                1 |              4 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Vpgbx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                1 |              4 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Dzvpw6_i_1_n_0 |                                              |                2 |              4 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Kloax6_i_1_n_0 | u_CORTEXM0INTEGRATION/u_logic/Ehpax6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Zgzpw6_i_1_n_0 | u_CORTEXM0INTEGRATION/u_logic/Tg0qw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Jsmiu6         | u_CORTEXM0INTEGRATION/u_logic/Lpwax6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ztmiu6         | u_CORTEXM0INTEGRATION/u_logic/De6bx6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Csmiu6         | u_CORTEXM0INTEGRATION/u_logic/Eotax6_i_1_n_0 |                1 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/A5qax6_i_1_n_0 | u_CORTEXM0INTEGRATION/u_logic/U0rax6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Numiu6         | u_CORTEXM0INTEGRATION/u_logic/C5wpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Qsmiu6         | u_CORTEXM0INTEGRATION/u_logic/Cdwpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Cmlax6_i_1_n_0 | u_CORTEXM0INTEGRATION/u_logic/Whmax6_i_1_n_0 |                3 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/S5nax6_i_1_n_0 | u_CORTEXM0INTEGRATION/u_logic/Nznax6_i_1_n_0 |                3 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Stmiu6         | u_CORTEXM0INTEGRATION/u_logic/O4sax6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Xsmiu6         | u_CORTEXM0INTEGRATION/u_logic/V5vax6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Etmiu6         | u_CORTEXM0INTEGRATION/u_logic/Cbwpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ydkiu6         | u_CORTEXM0INTEGRATION/u_logic/Cfwpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Gumiu6         | u_CORTEXM0INTEGRATION/u_logic/C7wpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ltmiu6         | u_CORTEXM0INTEGRATION/u_logic/C9wpw6_i_1_n_0 |                2 |              5 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Bcabx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                2 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/R1abx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                2 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Mfyax6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                4 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/L8zax6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                2 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/X7abx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                3 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Pz9bx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                3 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Z9abx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                2 |              8 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Nv9bx6_i_1_n_0 | reset_sync_reg_reg[4]_inv_n_0                |                2 |              8 |
+|  fclk          | uAHB2RAM/E[0]                                | reset_sync_reg_reg[4]_inv_n_0                |                6 |             15 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Wnxax6_i_1_n_0 |                                              |               10 |             24 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Zgzpw6_i_1_n_0 |                                              |               16 |             25 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ydkiu6         |                                              |               11 |             25 |
+|  fclk          | uAHBMUX/APHASE_MUX_SEL_reg[3]_5              | reset_sync_reg_reg[4]_inv_n_0                |               13 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Cmlax6_i_1_n_0 |                                              |               15 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Csmiu6         |                                              |               16 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/A5qax6_i_1_n_0 |                                              |               11 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Etmiu6         |                                              |               11 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Gumiu6         |                                              |               12 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Jsmiu6         |                                              |               14 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ltmiu6         |                                              |               16 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/S5nax6_i_1_n_0 |                                              |               13 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Numiu6         |                                              |               12 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Stmiu6         |                                              |               12 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Xsmiu6         |                                              |               13 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Kloax6_i_1_n_0 |                                              |                8 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Qsmiu6         |                                              |               11 |             27 |
+|  fclk          | u_CORTEXM0INTEGRATION/u_logic/Ztmiu6         |                                              |               10 |             27 |
+|  fclk          |                                              |                                              |               58 |             99 |
+|  fclk          |                                              | reset_sync_reg_reg[4]_inv_n_0                |              120 |            173 |
++----------------+----------------------------------------------+----------------------------------------------+------------------+----------------+
+
+
