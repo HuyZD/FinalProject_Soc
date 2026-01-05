@@ -1,19 +1,13 @@
 
+LCD_BASE    EQU     0x50000000
+LCD_RS      EQU     (1 << 5)    ; 0x20
+LCD_EN      EQU     (1 << 6)    ; 0x40
 
-;------------------------------------------------------------------------------------------------------
-; Design and Implementation of an AHB Interrupt Mechanism  
-; 1)Input characters from keyboard (UART) and output to the terminal (using interrupt)
-; 2)A counter is incremented from 1 to 10 and displayed on the 7-segment display (using interrupt)
-;------------------------------------------------------------------------------------------------------
-
-
-
-; Vector Table Mapped to Address 0 at Reset
 
 						PRESERVE8
                 		THUMB
 
-        				AREA	RESET, DATA, READONLY	  			; First 32 WORDS is VECTOR TABLE
+        				AREA	RESET, DATA, READONLY
         				EXPORT 	__Vectors
 					
 __Vectors		    	DCD		0x00003FFC
@@ -35,8 +29,8 @@ __Vectors		    	DCD		0x00003FFC
         				
         				; External Interrupts
 						        				
-        				DCD		Timer_Handler
-        				DCD		UART_Handler
+        				DCD		0
+        				DCD		0
         				DCD		0
         				DCD		0
         				DCD		0
@@ -53,91 +47,202 @@ __Vectors		    	DCD		0x00003FFC
         				DCD		0
               
                 AREA |.text|, CODE, READONLY
-;Reset Handler
-Reset_Handler   PROC
-                GLOBAL Reset_Handler
+
+                ALIGN   4
                 ENTRY
-			; Configure NVIC
-				; Set interrupt priority registers
-				LDR  R0, =0xE000E400      
-				;LDR  R1, [R0]    	         
-				;MOVS R2, #0xFFFF            
-				;BICS R1, R1, R2         
+        EXPORT  Reset_Handler
 
-				LDR R1, =0x00004000    ;uart 40, timer 00       
-				;ORRS R1, R1, R2          
-
-				STR  R1, [R0]            
-
-
-                ;Set interrupt Enbale Register
-				LDR R0, =0xE000E100
-				LDR R1, =0x00000003
-				STR R1, [R0]
-		
-
-				;Configure the timer
-				LDR R1, =0x52000000
-				LDR R0, =0x00FAF080 ; 50tr clock
-				STR R0, [R1]  ; store R0 into Load register
-				
-				LDR R1, =0x52000008  ;get addr control register
-				MOVS R0, #0x07
-				STR R0, [R1]
-
-
-                LDR     R5, =0x00000030		;counting-up counter, start from '0' (ascii=0x30)  
-
-AGAIN						
-				B		AGAIN		
-
-
+Reset_Handler   PROC
+				; 1. Setup LCD
+				BL      LCD_init
+				; 2. Print Message
+				LDR     R0, =my_string
+				BL      lcd_write_string
+				; 3. Trap CPU
+AGAIN
+				B       AGAIN
 				ENDP
 
-Timer_Handler   PROC
-                EXPORT Timer_Handler
-				
-				PUSH	{R0, R1,R2, LR}
-				LDR		R1, =0x5200000C
-				LDR		R0, =0x01
-				STR		R0, [R1]
-				
-				LDR		R1, =0x51000000
-				STR		R5, [R1]
-				ADDS	R5, R5, #0x01
-				CMP		R5, #0x3A
-				BNE		NEXT
-				LDR		R1, =0x52000008
-				LDR		R0, =0x00
-				STR	    R0, [R1]
-				;LDR		R2, =0xE000E180
-				;MOVS	R0, #0x1
-				;STR		R0, [R2]
-NEXT			
-				LDR		R1, =0x51000000
-				MOVS	R0, #' '
-				STR		R0, [R1]
-				POP		{R0, R1,R2, PC}
-                ENDP
 
-UART_Handler    PROC
-                EXPORT UART_Handler
-				; write your code here
-				PUSH	{R0, R1, LR}
-				LDR 	R1, =0x51000000
-				
-				
-				LDR		R0,[R1]
-				STR		R0, [R1]
-			
+; PART 2: STRUCTURAL CHANGES (REFACTORED DRIVER)
+; NEW FUNCTION: lcd_send_byte
+; REPLACES: lcd_cmd AND lcd_data
+; INPUT: R0 = Data Byte, R1 = Mode (0=Cmd, 1=Data)
+; CHANGE: G?p 2 hàm thành 1 d? thay d?i c?u trúc code
 
-				POP     {R0, R1, PC}
-				
-			
+lcd_send_byte  PROC
+        PUSH    {R4, R5, LR}
+        
+        MOV     R4, R0              ; Save Data
+        MOV     R5, R1              ; Save Mode
 
-                ENDP
+        ; Phase 1: High Nibble 
+		
+		
+        LSRS    R0, R4, #4          ; Shift Right 4
+        MOV     R1, R5              ; Restore Mode
+        BL      lcd_send_nibble      ; Call physical layer
 
-				ALIGN 		4					 ; Align to a word boundary
+        ; Phase 2: Low Nibble 
+        MOV     R0, R4              ; Restore Data
+        MOVS    R2, #0x0F           ; Mask
+        ANDS    R0, R0, R2
+        MOV     R1, R5              ; Restore Mode
+        BL      lcd_send_nibble      ; Call physical layer
 
-		END                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-   
+        ; Phase 3: Post-write Delay 
+        LDR     R0, =2000
+        BL      Delay
+
+        POP     {R4, R5, PC}
+        ENDP
+
+
+LCD_init PROC
+        PUSH    {LR}
+
+        ; Power ON Wait
+        LDR     R0, =50000
+        BL      Delay
+
+        ; Reset Sequence (Raw Nibbles)
+        ; Loop unrolling removed, manual calls for clarity
+        
+        ; Step 1: 0x03
+        MOVS    R0, #3
+        MOVS    R1, #0
+        BL      lcd_send_nibble
+        LDR     R0, =5000
+        BL      Delay
+
+        ; Step 2: 0x03
+        MOVS    R0, #3
+        MOVS    R1, #0
+        BL      lcd_send_nibble
+        LDR     R0, =2000
+        BL      Delay
+
+        ; Step 3: 0x03
+        MOVS    R0, #3
+        MOVS    R1, #0
+        BL      lcd_send_nibble
+        LDR     R0, =2000
+        BL      Delay
+
+        ; Step 4: 0x02 (4-bit Interface)
+        MOVS    R0, #2
+        MOVS    R1, #0
+        BL      lcd_send_nibble
+        LDR     R0, =2000
+        BL      Delay
+
+        ;  Config Sequence (Using merged function)
+        
+        ; Function Set (0x28)
+        MOVS    R0, #0x28
+        MOVS    R1, #0              ; Mode 0 = CMD
+        BL      lcd_send_byte
+
+        ; Display Control (0x0C)
+        MOVS    R0, #0x0C
+        MOVS    R1, #0
+        BL      lcd_send_byte
+
+        ; Clear Display (0x01)
+        MOVS    R0, #0x01
+        MOVS    R1, #0
+        BL      lcd_send_byte
+        
+        ; Clear needs extra wait
+        LDR     R0, =60000
+        BL      Delay
+
+        ; Entry Mode (0x06)
+        MOVS    R0, #0x06
+        MOVS    R1, #0
+        BL      lcd_send_byte
+
+        POP     {PC}
+        ENDP
+
+
+; RENAMED FUNCTION: lcd_send_nibble
+; PREVIOUSLY: lcd_send_nibble
+
+lcd_send_nibble  PROC
+        PUSH    {R4, R5, LR}
+        
+        ; Construct Output Byte in R4
+        MOVS    R4, #0
+        
+        ; 1. Handle RS (R1)
+        LSLS    R2, R1, #5          ; Shift RS to bit 5
+        ORRS    R4, R4, R2
+        
+        ; 2. Handle Data (R0)
+        MOVS    R2, #0x0F
+        ANDS    R0, R0, R2
+        ORRS    R4, R4, R0          ; R4 is now [0][RS][0][DATA]
+        
+        LDR     R5, =LCD_BASE
+
+        ; 3. Pulse Sequence
+        ; Setup
+        STR     R4, [R5]
+        MOVS    R0, #50
+        BL      Delay
+        
+        ; Enable High
+        MOVS    R2, #LCD_EN
+        MOV     R3, R4
+        ORRS    R3, R3, R2
+        STR     R3, [R5]
+        MOVS    R0, #100            ; Increased for safety
+        BL      Delay
+        
+        ; Enable Low
+        STR     R4, [R5]
+        MOVS    R0, #50
+        BL      Delay
+
+        POP     {R4, R5, PC}
+        ENDP
+
+
+; RESTRUCTURED LOOP: Lcd_String_Out
+; PREVIOUSLY: LCD_PutString
+
+lcd_write_string  PROC
+        PUSH    {R4, LR}
+        MOV     R4, R0              ; Ptr copy
+        
+next_char
+        LDRB    R0, [R4]            ; Load
+        CMP     R0, #0              ; Check Null
+        BEQ     write_string_done             ; Exit if 0
+        
+        MOVS    R1, #1              ; Mode 1 = DATA (Change from previous logic)
+        BL      lcd_send_byte      ; Call Merged Function
+        
+        ADDS    R4, R4, #1          ; Increment
+        B       next_char           ; Loop
+
+write_string_done
+        POP     {R4, PC}
+        ENDP
+
+
+Delay   PROC
+		CMP     R0, #0
+        BEQ     end_loop
+decr_loop  SUBS    R0, R0, #1
+        BNE     decr_loop	
+end_loop BX      LR
+        ENDP
+
+; DATA
+
+        ALIGN   4
+my_string       DCB     "Huy Duong", 0
+
+        END

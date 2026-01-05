@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\code.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\code.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Wed Dec  3 17:22:55 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Mon Jan  5 23:15:17 2026
 <BR><P>
 <H3>Maximum Stack Usage =          0 bytes + Unknown(Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -13,25 +13,55 @@ Call chain for Maximum Stack Depth:</H3>
 Function Pointers
 </H3><UL>
  <LI><a href="#[0]">Reset_Handler</a> from cm0dsasm.o(.text) referenced from cm0dsasm.o(RESET)
- <LI><a href="#[1]">Timer_Handler</a> from cm0dsasm.o(.text) referenced from cm0dsasm.o(RESET)
- <LI><a href="#[2]">UART_Handler</a> from cm0dsasm.o(.text) referenced from cm0dsasm.o(RESET)
 </UL>
 <P>
 <H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> cm0dsasm.o(RESET)
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_string
+<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
 </UL>
-<P><STRONG><a name="[1]"></a>Timer_Handler</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> cm0dsasm.o(RESET)
-</UL>
-<P><STRONG><a name="[2]"></a>UART_Handler</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> cm0dsasm.o(RESET)
 </UL><P>
 <H3>
 Local Symbols
-</H3><P>
+</H3>
+<P><STRONG><a name="[1]"></a>lcd_send_byte</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay
+<LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_nibble
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_write_string
+<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
+</UL>
+
+<P><STRONG><a name="[2]"></a>LCD_init</STRONG> (Thumb, 104 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay
+<LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_nibble
+<LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_byte
+</UL>
+<BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[3]"></a>lcd_send_nibble</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
+<LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_byte
+</UL>
+
+<P><STRONG><a name="[4]"></a>lcd_write_string</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_byte
+</UL>
+<BR>[Called By]<UL><LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[5]"></a>Delay</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, cm0dsasm.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_nibble
+<LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_init
+<LI><a href="#[1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_send_byte
+</UL>
+<P>
 <H3>
 Undefined Global Symbols
 </H3><HR></body></html>
