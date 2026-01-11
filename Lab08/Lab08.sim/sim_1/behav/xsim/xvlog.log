@@ -1,0 +1,20 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BRAM/AHB2BRAM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AHB2MEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_LED/AHB2LED.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AHB2LED
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBDCD.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AHBDCD
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBMUX.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AHBMUX
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/CORTEXM0INTEGRATION.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module CORTEXM0INTEGRATION
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/cortexm0ds_logic.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cortexm0ds_logic
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module AHBLITE_SYS
+INFO: [VRFC 10-2458] undeclared symbol TMS, assumed default net type wire [H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v:150]
+INFO: [VRFC 10-2458] undeclared symbol TDO, assumed default net type wire [H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v:151]
+INFO: [VRFC 10-2458] undeclared symbol TCK, assumed default net type wire [H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v:191]
+INFO: [VRFC 10-2458] undeclared symbol TDI, assumed default net type wire [H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v:193]
+INFO: [VRFC 10-2263] Analyzing Verilog file "H:/Project_Soc/Hardware/Lab08/Lab08.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

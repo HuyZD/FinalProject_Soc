@@ -1,0 +1,22 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: H:/Xilinx/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto d712465f2ad04c98a5ae7815f74fb9f7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot AHBLITE_SYS_behav xil_defaultlib.AHBLITE_SYS xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+WARNING: [VRFC 10-3091] actual bit length 2 differs from formal bit length 1 for port 'HRESP' [H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v:181]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4100] "/wrk/2018.3/continuous/2018_12_06_2405991/data/verilog/src/unisims/BUFG.v" Line 27. Module BUFG has a timescale but at least one module in design doesn't have timescale.
+WARNING: [XSIM 43-4100] "H:/Project_Soc/Hardware/Lab08/Lab08.sim/sim_1/behav/xsim/glbl.v" Line 6. Module glbl has a timescale but at least one module in design doesn't have timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.BUFG
+Compiling module xil_defaultlib.cortexm0ds_logic
+Compiling module xil_defaultlib.CORTEXM0INTEGRATION
+Compiling module xil_defaultlib.AHBDCD
+Compiling module xil_defaultlib.AHBMUX
+Compiling module xil_defaultlib.AHB2MEM
+Compiling module xil_defaultlib.AHB2LED
+Compiling module xil_defaultlib.AHBLITE_SYS
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot AHBLITE_SYS_behav

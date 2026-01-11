@@ -1,0 +1,12 @@
+0.6
+2018.3
+Dec  7 2018
+00:33:28
+H:/Project_Soc/Hardware/Lab08/Lab08.sim/sim_1/behav/xsim/glbl.v,1544155481,verilog,,,,glbl,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v,1765938331,verilog,,,,AHBLITE_SYS,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BRAM/AHB2BRAM.v,1632705177,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_LED/AHB2LED.v,,AHB2MEM,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBDCD.v,1632705174,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBMUX.v,,AHBDCD,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBMUX.v,1632705174,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/CORTEXM0INTEGRATION.v,,AHBMUX,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_LED/AHB2LED.v,1765366981,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHB_BUS/AHBDCD.v,,AHB2LED,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/CORTEXM0INTEGRATION.v,1506940729,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/cortexm0ds_logic.v,,CORTEXM0INTEGRATION,,,,,,,,
+H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/CortexM0-DS/cortexm0ds_logic.v,1506940729,verilog,,H:/Project_Soc/Hardware/Lab08/lab_files/FPGA/AHBLITE_SYS.v,,cortexm0ds_logic,,,,,,,,

@@ -1,0 +1,15 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../lab_files/FPGA/AHB_BRAM/AHB2BRAM.v" \
+"../../../../lab_files/FPGA/AHB_LED/AHB2LED.v" \
+"../../../../lab_files/FPGA/AHB_BUS/AHBDCD.v" \
+"../../../../lab_files/FPGA/AHB_BUS/AHBMUX.v" \
+"../../../../lab_files/FPGA/CortexM0-DS/CORTEXM0INTEGRATION.v" \
+"../../../../lab_files/FPGA/CortexM0-DS/cortexm0ds_logic.v" \
+"../../../../lab_files/FPGA/AHBLITE_SYS.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
